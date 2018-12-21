@@ -13,7 +13,7 @@ def main():
     host="localhost",
     user="root",
     passwd="password",
-    database="nmdbdev"
+    database="nmdbDev"
     )
 
   # Fetach all persistance vectors from DB 
