@@ -17,12 +17,7 @@ measurements_search_index = faiss.read_index("nmo_measurements.index")
 
 @app.before_first_request
 def init_neuron_ids():
-	mydb = mysql.connector.connect(
-	host="localhost",
-	user="root",
-	passwd="password",
-	database="nmdbDev"
-	)
+	mydb = mysql.connector.connect(host="localhost",user="root",passwd="password",database="nmdbDev")
 	mycursor = mydb.cursor()
 	mycursor.execute("SELECT neuron_id FROM persistance_vector order by neuron_id")
 	myresult = mycursor.fetchall()
@@ -37,7 +32,7 @@ def init_neuron_ids():
 		neuron_ids[index] = neuron_id[0]
 
 	mycursor.close()
-        mydb.close()
+	mydb.close()
 
 @app.route('/', methods=['GET'])
 def get():
@@ -54,9 +49,8 @@ def get_similar_neurons_measurements(neuron_id,num_of_neurons):
 		query_vector.append(x[2:])	
 	result = {}
 	s = {}
-
 	mycursor.close()
-    mydb.close()
+	mydb.close()
 
 	# Normalize the query vector before searching (for cosine inner product search)
 	query_vector = np.asarray(query_vector).astype('float32')
@@ -83,9 +77,8 @@ def get_similar_neurons(neuron_id,num_of_neurons):
 		query_vector.append(x[4:])	
 	result = {}
 	s = {}
-
 	mycursor.close()
-    mydb.close()
+	mydb.close()
 
 	# Normalize the query vector before searching (for cosine inner product search)
 	query_vector = np.asarray(query_vector).astype('float32')
