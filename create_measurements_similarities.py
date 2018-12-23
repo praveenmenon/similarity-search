@@ -19,7 +19,7 @@ def main():
   # Fetach all persistance vectors from DB 
   # ordering by neuron_id important as we receive only id of the array from faiss, not the neuron_id iteslf.
   mycursor = mydb.cursor()
-  mycursor.execute("SELECT IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurements order by neuron_id")
+  mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurements order by neuron_id")
   myresult = mycursor.fetchall()
 
   vectors = []
