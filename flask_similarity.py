@@ -94,4 +94,32 @@ def get_similar_neurons(neuron_id,num_of_neurons):
 
 	return jsonify(result)
 
+@app.route('/similarNeurons/pvecAndMeasurements/<int:neuron_id>/<int:num_of_neurons>', methods=['GET'])
+def get_similar_neurons_pvec_and_measurements(neuron_id,num_of_neurons):
+	mydb = mysql.connector.connect(host="localhost",user="root",passwd="password",database="nmdbDev")
+	mycursor = mydb.cursor()
+	mycursor.execute("SELECT p.*, IFNULL(NULLIF(m.Soma_Surface, '' ), 0) as Soma_Surface, m.N_stems, m.N_bifs, m.N_branch, m.Width, m.Height, m.Depth, m.Diameter, m.Length, m.Surface, m.Volume, m.EucDistance, m.PathDistance, m.Branch_Order , m.Contraction, m.Fragmentation, m.Partition_asymmetry, m.Pk_classic, m.Bif_ampl_local, m.Bif_ampl_remote, m.Fractal_Dim FROM persistance_vector p, measurements m order by neuron_id = " + str(neuron_id))
+	myresult = mycursor.fetchall()
+	query_vector = []
+	for x in myresult:
+		query_vector.append(x[4:])	
+	result = {}
+	s = {}
+	mycursor.close()
+	mydb.close()
+
+	# Normalize the query vector before searching (for cosine inner product search)
+	query_vector = np.asarray(query_vector).astype('float32')
+	normalize_L2(query_vector)
+	
+	# Actual Search
+	D, I = search_index.search(query_vector, num_of_neurons+1)
+
+	for index,val in enumerate(I[0][1:]):
+		s[neuron_ids[val]] = str(D[0][index+1])
+
+	result["similar_neuron_ids"] = s
+
+	return jsonify(result)
+
 
