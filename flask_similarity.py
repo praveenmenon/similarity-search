@@ -51,8 +51,10 @@ def get_similar_neurons_measurements(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurements where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+
 	for x in myresult:
-		query_vector.append(x[2:])	
+		query_vector.append(x[2:])
+
 	result = {}
 	s = {}
 	mycursor.close()
@@ -79,8 +81,22 @@ def get_similar_neurons_measurements_apical(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsAP where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+	
 	for x in myresult:
-		query_vector.append(x[2:])	
+		query_vector.append(x[2:])
+
+	#Check all vectors except Soma_Surface for None value / Null value
+	for y in myresult:
+		vectors.append(y[3:])
+	
+	#Iterate the vetors to check if it has None
+	result = all(v == None for v in vectors[0])
+	print("result:" + str(result))
+
+	if result == True:
+		print("true")
+		return jsonify({"message": "No Similar Neurons found"})
+
 	result = {}
 	s = {}
 	mycursor.close()
@@ -107,8 +123,22 @@ def get_similar_neurons_measurements_axon(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsAX where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+
 	for x in myresult:
-		query_vector.append(x[2:])	
+		query_vector.append(x[2:])
+
+	#Check all vectors except Soma_Surface for None value / Null value
+	for y in myresult:
+		vectors.append(y[3:])
+	
+	#Iterate the vetors to check if it has None
+	result = all(v == None for v in vectors[0])
+	print("result:" + str(result))
+
+	if result == True:
+		print("true")
+		return jsonify({"message": "No Similar Neurons found", "status": 204})
+
 	result = {}
 	s = {}
 	mycursor.close()
@@ -136,7 +166,20 @@ def get_similar_neurons_measurements_basal(neuron_id,num_of_neurons):
 	myresult = mycursor.fetchall()
 	query_vector = []
 	for x in myresult:
-		query_vector.append(x[2:])	
+		query_vector.append(x[2:])
+
+	#Check all vectors except Soma_Surface for None value / Null value
+	for y in myresult:
+		vectors.append(y[3:])
+	
+	#Iterate the vetors to check if it has None
+	result = all(v == None for v in vectors[0])
+	print("result:" + str(result))
+
+	if result == True:
+		print("true")
+		return jsonify({"message": "No Similar Neurons found", "status": 204})
+
 	result = {}
 	s = {}
 	mycursor.close()
@@ -163,8 +206,22 @@ def get_similar_neurons_measurements_neurites(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsNEU where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+	
 	for x in myresult:
-		query_vector.append(x[2:])	
+		query_vector.append(x[2:])
+
+	#Check all vectors except Soma_Surface for None value / Null value
+	for y in myresult:
+		vectors.append(y[3:])
+	
+	#Iterate the vetors to check if it has None
+	result = all(v == None for v in vectors[0])
+	print("result:" + str(result))
+
+	if result == True:
+		print("true")
+		return jsonify({"message": "No Similar Neurons found", "status": 204})
+
 	result = {}
 	s = {}
 	mycursor.close()
@@ -191,10 +248,26 @@ def get_similar_neurons_measurements_processes(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsPR where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+	vectors = []
 	for x in myresult:
-		query_vector.append(x[2:])	
+		query_vector.append(x[2:])
+
+	#Check all vectors except Soma_Surface for None value / Null value
+	for y in myresult:
+		vectors.append(y[3:])
+	
+	#Iterate the vetors to check if it has None
+	result = all(v == None for v in vectors[0])
+	print("result:" + str(result))
+
+	if result == True:
+		print("true")
+		return jsonify({"message": "No Similar Neurons found", "status": 204})
+	
 	result = {}
 	s = {}
+
+	# close all database connectivity
 	mycursor.close()
 	mydb.close()
 
@@ -247,8 +320,10 @@ def get_similar_neurons_pvec_and_measurements(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT p.*, IFNULL(NULLIF(m.Soma_Surface, '' ), 0) as Soma_Surface, m.N_stems, m.N_bifs, m.N_branch, m.Width, m.Height, m.Depth, m.Diameter, m.Length, m.Surface, m.Volume, m.EucDistance, m.PathDistance, m.Branch_Order , m.Contraction, m.Fragmentation, m.Partition_asymmetry, m.Pk_classic, m.Bif_ampl_local, m.Bif_ampl_remote, m.Fractal_Dim FROM persistance_vector p JOIN measurements m on p.neuron_id = m.neuron_id where p.neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+
 	for x in myresult:
-		query_vector.append(x[4:])	
+		query_vector.append(x[4:])
+
 	result = {}
 	s = {}
 	mycursor.close()
