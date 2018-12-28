@@ -98,7 +98,7 @@ def get_similar_neurons(neuron_id,num_of_neurons):
 def get_similar_neurons_pvec_and_measurements(neuron_id,num_of_neurons):
 	mydb = mysql.connector.connect(host="localhost",user="root",passwd="password",database="nmdbDev")
 	mycursor = mydb.cursor()
-	mycursor.execute("SELECT p.*, IFNULL(NULLIF(m.Soma_Surface, '' ), 0) as Soma_Surface, m.N_stems, m.N_bifs, m.N_branch, m.Width, m.Height, m.Depth, m.Diameter, m.Length, m.Surface, m.Volume, m.EucDistance, m.PathDistance, m.Branch_Order , m.Contraction, m.Fragmentation, m.Partition_asymmetry, m.Pk_classic, m.Bif_ampl_local, m.Bif_ampl_remote, m.Fractal_Dim FROM persistance_vector p, measurements m order by neuron_id = " + str(neuron_id))
+	mycursor.execute("SELECT p.*, IFNULL(NULLIF(m.Soma_Surface, '' ), 0) as Soma_Surface, m.N_stems, m.N_bifs, m.N_branch, m.Width, m.Height, m.Depth, m.Diameter, m.Length, m.Surface, m.Volume, m.EucDistance, m.PathDistance, m.Branch_Order , m.Contraction, m.Fragmentation, m.Partition_asymmetry, m.Pk_classic, m.Bif_ampl_local, m.Bif_ampl_remote, m.Fractal_Dim FROM persistance_vector p JOIN measurements m on p.neuron_id = m.neuron_id where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
 	for x in myresult:
