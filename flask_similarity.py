@@ -83,7 +83,7 @@ def get_similar_neurons_measurements_apical(neuron_id,num_of_neurons):
 	myresult = mycursor.fetchall()
 	query_vector = []
 	vectors = []
-	
+
 	for x in myresult:
 		query_vector.append(x[2:])
 
@@ -97,7 +97,7 @@ def get_similar_neurons_measurements_apical(neuron_id,num_of_neurons):
 
 	if result == True:
 		print("true")
-		return jsonify({"message": "No Similar Neurons found"})
+		return jsonify({"message": "No Similar Neurons found", "status": 204})
 
 	result = {}
 	s = {}
