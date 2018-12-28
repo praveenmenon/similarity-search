@@ -82,6 +82,7 @@ def get_similar_neurons_measurements_apical(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsAP where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+	vectors = []
 	
 	for x in myresult:
 		query_vector.append(x[2:])
@@ -125,6 +126,7 @@ def get_similar_neurons_measurements_axon(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsAX where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+	vectors = []
 
 	for x in myresult:
 		query_vector.append(x[2:])
@@ -168,6 +170,8 @@ def get_similar_neurons_measurements_basal(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsBS where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
+	vectors = []
+
 	for x in myresult:
 		query_vector.append(x[2:])
 
@@ -210,7 +214,8 @@ def get_similar_neurons_measurements_neurites(neuron_id,num_of_neurons):
 	mycursor.execute("SELECT neuron_id, Neuron_name, IFNULL(NULLIF(Soma_Surface, '' ), 0) as Soma_Surface, N_stems, N_bifs, N_branch, Width, Height, Depth, Diameter, Length, Surface, Volume, EucDistance, PathDistance, Branch_Order , Contraction, Fragmentation, Partition_asymmetry, Pk_classic, Bif_ampl_local, Bif_ampl_remote, Fractal_Dim FROM measurementsNEU where neuron_id = " + str(neuron_id))
 	myresult = mycursor.fetchall()
 	query_vector = []
-	
+	vectors = []
+
 	for x in myresult:
 		query_vector.append(x[2:])
 
