@@ -71,6 +71,7 @@ def get_similar_neurons_measurements(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -113,6 +114,7 @@ def get_similar_neurons_measurements_apical(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -155,6 +157,7 @@ def get_similar_neurons_measurements_axon(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -196,6 +199,7 @@ def get_similar_neurons_measurements_basal(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -238,6 +242,7 @@ def get_similar_neurons_measurements_neurites(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -282,6 +287,7 @@ def get_similar_neurons_measurements_processes(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -310,6 +316,7 @@ def get_similar_neurons(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
@@ -340,6 +347,7 @@ def get_similar_neurons_pvec_and_measurements(neuron_id,num_of_neurons):
 		s[neuron_ids[val]] = str(D[0][index+1])
 
 	result["similar_neuron_ids"] = s
+	result["status"] = 200
 
 	return jsonify(result)
 
