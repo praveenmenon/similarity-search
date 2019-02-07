@@ -11,8 +11,8 @@ def main():
   # Set the database parameters to connect
   mydb = mysql.connector.connect(
     host="localhost",
-    user="root",
-    passwd="password",
+    user="Swami",
+    passwd="cngpassspv",
     database="nmdbDev"
     )
 
